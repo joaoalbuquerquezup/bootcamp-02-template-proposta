@@ -12,13 +12,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 public class Proposal {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // UUID?
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(updatable = false, unique = true, nullable = false)
+    private UUID id;
 
     @NotBlank @CpfCnpj
     @Column(nullable = false, unique = true)
@@ -58,7 +60,7 @@ public class Proposal {
         this.wage = wage;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 }
