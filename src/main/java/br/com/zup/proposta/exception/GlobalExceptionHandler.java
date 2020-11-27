@@ -59,7 +59,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, String>> handleUncaught(Exception ex) {
-        LOGGER.error(ex.getMessage(), ex);
+        Throwable cause = ex.getCause();
+        LOGGER.error(cause.toString() + " | " + cause.getMessage(), cause);
 
         Map<String, String> ERROR = Map.of("message", GlobalExceptionHandler.GENERIC_ERROR);
 
