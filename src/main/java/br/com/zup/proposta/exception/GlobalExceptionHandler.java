@@ -1,11 +1,9 @@
 package br.com.zup.proposta.exception;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -20,8 +18,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -35,7 +33,7 @@ public class GlobalExceptionHandler {
         this.messageSource = messageSource;
     }
 
-    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(code = BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public List<ApiError> handleControllerValidation(MethodArgumentNotValidException exception) {
 
@@ -47,7 +45,7 @@ public class GlobalExceptionHandler {
         }).collect(Collectors.toList());
     }
 
-    @ResponseStatus(code = UNPROCESSABLE_ENTITY)
+    @ResponseStatus(code = BAD_REQUEST)
     @ExceptionHandler(ConstraintViolationException.class)
     public List<ApiError> handleInvalidState(ConstraintViolationException exception) {
         Set<ConstraintViolation<?>> constraintViolations = exception.getConstraintViolations();

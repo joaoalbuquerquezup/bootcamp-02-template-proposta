@@ -10,7 +10,6 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.lang.reflect.Field;
 
-
 @Component
 public class UniqueValidator implements ConstraintValidator<Unique, Object> {
 
@@ -39,10 +38,10 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
         String sql = "select 1 from " + this.entityClass.getSimpleName() + " where " + this.entityField + "= :entityField";
 
         return this.entityManager
-            .createQuery(sql)
-            .setParameter("entityField", propValueThatMustBeUnique)
-            .getResultList()
-            .isEmpty();
+                    .createQuery(sql)
+                    .setParameter("entityField", propValueThatMustBeUnique)
+                    .getResultList()
+                    .isEmpty();
     }
 
     private String getFieldValueByReflection(ConstraintValidatorContext context) {
