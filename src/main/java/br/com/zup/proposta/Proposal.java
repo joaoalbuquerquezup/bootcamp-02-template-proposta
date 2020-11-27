@@ -21,7 +21,7 @@ public class Proposal {
     private Long id;
 
     @NotBlank @CpfCnpj
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String document;
 
     @NotBlank @Email
