@@ -4,6 +4,7 @@ import br.com.zup.proposta.validation.CpfCnpj;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.UUID;
+
+import static javax.persistence.EnumType.STRING;
 
 @Entity
 public class Proposal {
@@ -42,6 +45,9 @@ public class Proposal {
     @Column(nullable = false)
     private BigDecimal wage;
 
+    @Enumerated(STRING)
+    private ProposalStatus status;
+
     /**
      * Hibernate usage only
      */
@@ -62,5 +68,17 @@ public class Proposal {
 
     public UUID getId() {
         return id;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setStatus(ProposalStatus status) {
+        this.status = status;
     }
 }
