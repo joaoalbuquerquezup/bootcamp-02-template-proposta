@@ -1,5 +1,6 @@
 package br.com.zup.proposta;
 
+import br.com.zup.proposta.analyze.ProposalAnalyzerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +21,16 @@ import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 public class NewProposalController {
 
     private final EntityManager entityManager;
+    private final ProposalAnalyzerService proposalAnalyzerService;
 
-    public NewProposalController(EntityManager entityManager) {
+    public NewProposalController(EntityManager entityManager,
+                                 ProposalAnalyzerService proposalAnalyzerService) {
         this.entityManager = entityManager;
+        this.proposalAnalyzerService = proposalAnalyzerService;
     }
 
     @PostMapping
-    @Transactional
+    @Transactional // tirar
     public ResponseEntity<Void> create(@Valid @RequestBody NewProposalRequest newProposalRequest,
                                        UriComponentsBuilder uriComponentsBuilder) {
 
@@ -41,6 +45,9 @@ public class NewProposalController {
 
         Proposal proposal = newProposalRequest.toModel();
         this.entityManager.persist(proposal);
+
+        var proposalStatus = this.proposalAnalyzerService.getProposalStatus(proposal);
+        proposal.setStatus(proposalStatus);
 
         URI uri = uriComponentsBuilder.path("/proposal/{id}").buildAndExpand(proposal.getId()).toUri();
         return ResponseEntity.created(uri).build();
