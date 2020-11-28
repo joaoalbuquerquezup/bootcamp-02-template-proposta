@@ -1,4 +1,4 @@
-package br.com.zup.proposta.exception;
+package br.com.zup.proposta.advice;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

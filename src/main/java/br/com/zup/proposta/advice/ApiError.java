@@ -1,4 +1,4 @@
-package br.com.zup.proposta.exception;
+package br.com.zup.proposta.advice;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
