@@ -81,4 +81,8 @@ public class Proposal {
     public void setStatus(ProposalStatus status) {
         this.status = status;
     }
+
+    public ProposalStatus getStatus() {
+        return status;
+    }
 }

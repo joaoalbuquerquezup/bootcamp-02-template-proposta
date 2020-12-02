@@ -1,6 +1,8 @@
 package br.com.zup.proposta;
 
 import br.com.zup.proposta.analyze.ProposalAnalyzerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +26,8 @@ public class NewProposalController {
     private final TransactionTemplate txTemplate;
 
     private final ProposalAnalyzerService proposalAnalyzerService;
+
+    private final Logger LOGGER = LoggerFactory.getLogger(NewProposalController.class);
 
     public NewProposalController(EntityManager entityManager,
                                  ProposalAnalyzerService proposalAnalyzerService,
@@ -61,6 +65,7 @@ public class NewProposalController {
             return txStatus;
         });
 
+        LOGGER.info("Proposal created | document: {}, status: {}", proposal.getDocument(), proposal.getStatus());
         URI uri = uriComponentsBuilder.path("/proposal/{id}").buildAndExpand(proposal.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
