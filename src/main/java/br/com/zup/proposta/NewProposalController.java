@@ -57,6 +57,7 @@ public class NewProposalController {
             return txStatus;
         });
 
+        // TODO: Criar maquina de estado com scheduling para lidar com os erros de chamada a serviço externo
         ProposalStatus proposalStatus = this.proposalAnalyzerService.getProposalStatus(proposal);
 
         txTemplate.execute(txStatus -> {
@@ -66,6 +67,7 @@ public class NewProposalController {
         });
 
         LOGGER.info("Proposal created | document: {}, status: {}", proposal.getDocument(), proposal.getStatus());
+
         URI uri = uriComponentsBuilder.path("/proposal/{id}").buildAndExpand(proposal.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }

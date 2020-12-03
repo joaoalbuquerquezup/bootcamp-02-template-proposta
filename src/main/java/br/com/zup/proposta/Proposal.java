@@ -15,6 +15,7 @@ import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import static br.com.zup.proposta.ProposalStatus.PENDNING;
 import static javax.persistence.EnumType.STRING;
 
 @Entity
@@ -64,6 +65,7 @@ public class Proposal {
         this.name = name;
         this.address = address;
         this.wage = wage;
+        this.status = PENDNING;
     }
 
     public UUID getId() {
