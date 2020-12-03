@@ -1,4 +1,4 @@
-package br.com.zup.proposta;
+package br.com.zup.proposta.proposal;
 
 import br.com.zup.proposta.analyze.ProposalAnalyzerService;
 import org.slf4j.Logger;

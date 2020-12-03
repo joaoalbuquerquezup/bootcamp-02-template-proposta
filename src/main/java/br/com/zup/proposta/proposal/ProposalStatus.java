@@ -1,4 +1,4 @@
-package br.com.zup.proposta;
+package br.com.zup.proposta.proposal;
 
 public enum ProposalStatus {
 

@@ -1,7 +1,7 @@
 package br.com.zup.proposta.analyze;
 
-import br.com.zup.proposta.Proposal;
-import br.com.zup.proposta.ProposalStatus;
+import br.com.zup.proposta.proposal.Proposal;
+import br.com.zup.proposta.proposal.ProposalStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import feign.FeignException;
 import org.springframework.stereotype.Service;

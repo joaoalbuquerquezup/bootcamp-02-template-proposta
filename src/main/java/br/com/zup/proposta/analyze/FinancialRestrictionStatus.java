@@ -1,6 +1,6 @@
 package br.com.zup.proposta.analyze;
 
-import br.com.zup.proposta.ProposalStatus;
+import br.com.zup.proposta.proposal.ProposalStatus;
 
 public enum FinancialRestrictionStatus {
 

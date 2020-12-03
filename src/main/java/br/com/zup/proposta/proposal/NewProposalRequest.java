@@ -1,4 +1,4 @@
-package br.com.zup.proposta;
+package br.com.zup.proposta.proposal;
 
 import br.com.zup.proposta.validation.CpfCnpj;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;

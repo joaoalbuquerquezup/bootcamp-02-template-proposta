@@ -1,4 +1,4 @@
-package br.com.zup.proposta;
+package br.com.zup.proposta.proposal;
 
 import br.com.zup.proposta.validation.CpfCnpj;
 
@@ -15,7 +15,7 @@ import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import static br.com.zup.proposta.ProposalStatus.PENDNING;
+import static br.com.zup.proposta.proposal.ProposalStatus.PENDNING;
 import static javax.persistence.EnumType.STRING;
 
 @Entity
