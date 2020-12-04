@@ -27,7 +27,7 @@ public class NewProposalController {
 
     private final ProposalAnalyzerService proposalAnalyzerService;
 
-    private final Logger LOGGER = LoggerFactory.getLogger(NewProposalController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NewProposalController.class);
 
     public NewProposalController(EntityManager entityManager,
                                  ProposalAnalyzerService proposalAnalyzerService,
