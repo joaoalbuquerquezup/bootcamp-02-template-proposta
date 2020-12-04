@@ -97,4 +97,16 @@ public class Proposal {
     public void setCard(Card card) {
         this.card = card;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public BigDecimal getWage() {
+        return wage;
+    }
 }
