@@ -2,7 +2,6 @@ package br.com.zup.proposta.card;
 
 import br.com.zup.proposta.proposal.Proposal;
 import br.com.zup.proposta.proposal.ProposalRepository;
-import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -11,6 +10,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 import static br.com.zup.proposta.proposal.ProposalStatus.ELIGIBLE;
 
@@ -18,7 +18,7 @@ import static br.com.zup.proposta.proposal.ProposalStatus.ELIGIBLE;
 public class AssociateCardToProposalScheduler {
 
     private final ProposalRepository proposalRepository;
-    private final CardClient cardClient;
+    private final CardService cardService;
 
     private final EntityManager entityManager;
     private final TransactionTemplate txTemplate;
@@ -26,55 +26,37 @@ public class AssociateCardToProposalScheduler {
     private static final Logger LOGGER = LoggerFactory.getLogger(AssociateCardToProposalScheduler.class);
 
     public AssociateCardToProposalScheduler(ProposalRepository proposalRepository,
-                                            CardClient cardClient,
+                                            CardService cardService,
                                             EntityManager entityManager,
                                             TransactionTemplate txTemplate) {
         this.proposalRepository = proposalRepository;
-        this.cardClient = cardClient;
+        this.cardService = cardService;
         this.entityManager = entityManager;
         this.txTemplate = txTemplate;
     }
 
-    /**
-     * Verificar se é melhor aproveitar a independência da chamada de criação
-     * e leitura do cartão e fazer duas iterações
-     *
-     * REFATORAR - 10 PTs CDD
-     */
     @Scheduled(fixedDelayString = "${card-to-proposal.schedule.fixed-delay}")
     public void schedule() {
 
         List<Proposal> proposalList = this.proposalRepository.findByStatusAndCardIsNull(ELIGIBLE);
 
-        for (Proposal proposal : proposalList) {
+        proposalList.forEach(proposal -> {
 
-            Card card;
+            Optional<Card> optionalCard = this.cardService.getGeneratedCardByProposal(proposal);
+            optionalCard.ifPresent(card -> {
 
-            try {
-                CardCreationRequest cardCreationRequest = new CardCreationRequest(proposal);
-                this.cardClient.generateCard(cardCreationRequest);
+                this.txTemplate.execute(txStatus -> {
+                    this.entityManager.persist(card);
 
-                CardRetrieveResponse cardRetrieveResponse = this.cardClient.retrieveCard(proposal.getId());
-                card = new Card(cardRetrieveResponse.getCardNumber());
+                    proposal.setCard(card);
+                    this.proposalRepository.save(proposal);
 
-            } catch (FeignException e) {
-                LOGGER.error("Error at card generation | Status code: {}, Body: {}, Message: {}",
-                        e.status(),
-                        e.contentUTF8(),
-                        e.getMessage());
+                    LOGGER.info("Card associated and created | Document: {}", proposal.getDocument());
 
-                continue;
-            }
+                    return txStatus;
+                });
 
-            this.txTemplate.execute(txStatus -> {
-                proposal.setCard(card);
-                this.entityManager.persist(card);
-                this.proposalRepository.save(proposal);
-                LOGGER.info("Card associated and created | Document: {}", proposal.getDocument());
-
-                return txStatus;
             });
-        }
+        });
     }
-
 }
