@@ -1,13 +1,16 @@
 package br.com.zup.proposta.proposal;
 
+import br.com.zup.proposta.card.Card;
 import br.com.zup.proposta.validation.CpfCnpj;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -49,6 +52,9 @@ public class Proposal {
     @Enumerated(STRING)
     private ProposalStatus status;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private Card card;
+
     /**
      * Hibernate usage only
      */
@@ -86,5 +92,9 @@ public class Proposal {
 
     public ProposalStatus getStatus() {
         return status;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
     }
 }
