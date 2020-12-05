@@ -34,3 +34,7 @@ $ docker run -e SPRING_PROFILES_ACTIVE='dev' -e JDBC_LOCATION='jdbc:postgresql:/
 You must create and set up a `.env` file based on `.example-env`
 
 Reference: https://docs.docker.com/compose/environment-variables/
+
+# Tips
+
+Inside a container, you can connect to localhost with: `host.docker.internal:PORT`
