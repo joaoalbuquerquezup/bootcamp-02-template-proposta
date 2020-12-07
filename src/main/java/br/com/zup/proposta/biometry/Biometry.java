@@ -1,36 +1,30 @@
-package br.com.zup.proposta.card;
-
-import br.com.zup.proposta.biometry.Biometry;
+package br.com.zup.proposta.biometry;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-public class Card {
+public class Biometry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(updatable = false, unique = true, nullable = false)
     private UUID id;
 
-    private String number;
+    @Column(updatable =false, nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    @OneToMany
-    private List<Biometry> biometryList;
+    @Column(nullable = false)
+    private byte fingerprint;
 
     /**
      * Hibernate usage only
      */
     @Deprecated
-    protected Card() { }
-
-    public Card(String number) {
-        this.number = number;
-    }
+    protected Biometry() { }
 }
