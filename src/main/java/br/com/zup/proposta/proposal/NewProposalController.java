@@ -41,18 +41,13 @@ public class NewProposalController {
     public ResponseEntity<Void> create(@Valid @RequestBody NewProposalRequest newProposalRequest,
                                        UriComponentsBuilder uriComponentsBuilder) {
 
-        boolean proposalWithThisDocumentAlreadyExists = this.entityManager
-                .createQuery("select 1 from Proposal where document = :document")
-                .setParameter("document", newProposalRequest.getDocument())
-                .getResultList()
-                .size() > 0;
-
-        // https://stackoverflow.com/a/62743197/8303951 -> Conseguir esse comportamento usando os validadores que eu queria
-        if (proposalWithThisDocumentAlreadyExists) throw new ResponseStatusException(UNPROCESSABLE_ENTITY);
+        // TODO: https://stackoverflow.com/a/62743197/8303951 -> Conseguir esse comportamento usando os validadores que eu queria
+        boolean isAnyProposalWithThisDocument = this.isAnyProposalWithThisDocument(newProposalRequest);
+        if (isAnyProposalWithThisDocument) throw new ResponseStatusException(UNPROCESSABLE_ENTITY);
 
         Proposal proposal = newProposalRequest.toModel();
 
-        txTemplate.execute(txStatus -> {
+        this.txTemplate.execute(txStatus -> {
             this.entityManager.persist(proposal);
             return txStatus;
         });
@@ -60,15 +55,23 @@ public class NewProposalController {
         // TODO: Criar maquina de estado com scheduling para lidar com os erros de chamada a serviço externo
         ProposalStatus proposalStatus = this.proposalAnalyzerService.getProposalStatus(proposal);
 
-        txTemplate.execute(txStatus -> {
+        this.txTemplate.execute(txStatus -> {
             proposal.setStatus(proposalStatus);
             this.entityManager.merge(proposal);
             return txStatus;
         });
 
-        LOGGER.info("Proposal created | document: {}, status: {}", proposal.getDocument(), proposal.getStatus());
+        NewProposalController.LOGGER.info("Proposal created | document: {}, status: {}", proposal.getDocument(), proposal.getStatus());
 
         URI uri = uriComponentsBuilder.path("/proposal/{id}").buildAndExpand(proposal.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    private boolean isAnyProposalWithThisDocument(NewProposalRequest newProposalRequest) {
+        return this.entityManager
+                .createQuery("select 1 from Proposal where document = :document")
+                .setParameter("document", newProposalRequest.getDocument())
+                .getResultList()
+                .size() > 0;
     }
 }
