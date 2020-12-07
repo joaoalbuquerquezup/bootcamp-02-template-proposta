@@ -1,13 +1,16 @@
 package br.com.zup.proposta.card;
 
-import br.com.zup.proposta.biometry.Biometry;
+import br.com.zup.proposta.card.biometry.Biometry;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,8 +24,9 @@ public class Card {
 
     private String number;
 
-    @OneToMany
-    private List<Biometry> biometryList;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "card_id")
+    private List<Biometry> biometryList = new ArrayList<>();
 
     /**
      * Hibernate usage only
@@ -32,5 +36,9 @@ public class Card {
 
     public Card(String number) {
         this.number = number;
+    }
+
+    public void addBiometry(Biometry biometry) {
+        this.biometryList.add(biometry);
     }
 }
