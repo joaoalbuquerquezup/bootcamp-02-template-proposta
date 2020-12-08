@@ -1,4 +1,4 @@
-package br.com.zup.proposta.core.analyze;
+package br.com.zup.proposta.core.proposal.analyze;
 
 import br.com.zup.proposta.core.proposal.ProposalStatus;
 

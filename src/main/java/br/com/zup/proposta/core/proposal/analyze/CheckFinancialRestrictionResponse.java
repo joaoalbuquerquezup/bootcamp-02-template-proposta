@@ -1,4 +1,4 @@
-package br.com.zup.proposta.core.analyze;
+package br.com.zup.proposta.core.proposal.analyze;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
