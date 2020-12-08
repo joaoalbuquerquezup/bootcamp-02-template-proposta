@@ -42,7 +42,7 @@ public class AssociateCardToProposalScheduler {
 
         proposalList.forEach(proposal -> {
 
-            Optional<Card> optionalCard = this.cardService.retrieveCardByProposalId(proposal.getId());
+            Optional<Card> optionalCard = this.cardService.retrieveCardByProposal(proposal);
             optionalCard.ifPresent(card -> {
 
                 this.txTemplate.execute(txStatus -> {

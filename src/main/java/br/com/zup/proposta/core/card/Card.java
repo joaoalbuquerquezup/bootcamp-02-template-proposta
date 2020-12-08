@@ -58,8 +58,9 @@ public class Card {
     @Deprecated
     protected Card() { }
 
-    public Card(String number) {
+    public Card(String number, Proposal proposal) {
         this.number = number;
+        this.proposal = proposal;
     }
 
     public void addBiometry(Biometry biometry) {
