@@ -1,4 +1,4 @@
-package br.com.zup.proposta.card;
+package br.com.zup.proposta.core.card;
 
 import feign.FeignException;
 import org.slf4j.Logger;

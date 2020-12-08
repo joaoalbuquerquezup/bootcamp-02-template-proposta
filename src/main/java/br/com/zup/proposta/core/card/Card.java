@@ -1,6 +1,6 @@
-package br.com.zup.proposta.card;
+package br.com.zup.proposta.core.card;
 
-import br.com.zup.proposta.card.biometry.Biometry;
+import br.com.zup.proposta.core.card.biometry.Biometry;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

@@ -1,4 +1,4 @@
-package br.com.zup.proposta.card.biometry;
+package br.com.zup.proposta.core.card.biometry;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

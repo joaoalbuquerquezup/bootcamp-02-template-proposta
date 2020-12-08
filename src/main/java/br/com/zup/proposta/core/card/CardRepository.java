@@ -1,4 +1,4 @@
-package br.com.zup.proposta.card;
+package br.com.zup.proposta.core.card;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

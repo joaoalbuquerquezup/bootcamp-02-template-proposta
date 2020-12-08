@@ -1,6 +1,6 @@
-package br.com.zup.proposta.proposal;
+package br.com.zup.proposta.core.proposal;
 
-import br.com.zup.proposta.card.Card;
+import br.com.zup.proposta.core.card.Card;
 import br.com.zup.proposta.validation.CpfCnpj;
 
 import javax.persistence.Column;
@@ -18,7 +18,7 @@ import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import static br.com.zup.proposta.proposal.ProposalStatus.PENDNING;
+import static br.com.zup.proposta.core.proposal.ProposalStatus.PENDNING;
 import static javax.persistence.EnumType.STRING;
 
 @Entity

@@ -1,6 +1,6 @@
-package br.com.zup.proposta.proposal;
+package br.com.zup.proposta.core.proposal;
 
-import br.com.zup.proposta.analyze.ProposalAnalyzerService;
+import br.com.zup.proposta.core.analyze.ProposalAnalyzerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

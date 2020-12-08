@@ -1,6 +1,6 @@
-package br.com.zup.proposta.card;
+package br.com.zup.proposta.core.card;
 
-import br.com.zup.proposta.proposal.Proposal;
+import br.com.zup.proposta.core.proposal.Proposal;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

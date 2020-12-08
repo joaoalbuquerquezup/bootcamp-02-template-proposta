@@ -1,4 +1,4 @@
-package br.com.zup.proposta.analyze;
+package br.com.zup.proposta.core.analyze;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,4 +1,4 @@
-package br.com.zup.proposta.card.biometry;
+package br.com.zup.proposta.core.card.biometry;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

@@ -1,7 +1,7 @@
-package br.com.zup.proposta.card;
+package br.com.zup.proposta.core.card;
 
-import br.com.zup.proposta.proposal.Proposal;
-import br.com.zup.proposta.proposal.ProposalRepository;
+import br.com.zup.proposta.core.proposal.Proposal;
+import br.com.zup.proposta.core.proposal.ProposalRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-import static br.com.zup.proposta.proposal.ProposalStatus.ELIGIBLE;
+import static br.com.zup.proposta.core.proposal.ProposalStatus.ELIGIBLE;
 
 @Component
 public class AssociateCardToProposalScheduler {

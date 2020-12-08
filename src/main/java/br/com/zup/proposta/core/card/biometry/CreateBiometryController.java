@@ -1,7 +1,7 @@
-package br.com.zup.proposta.card.biometry;
+package br.com.zup.proposta.core.card.biometry;
 
-import br.com.zup.proposta.card.Card;
-import br.com.zup.proposta.card.CardRepository;
+import br.com.zup.proposta.core.card.Card;
+import br.com.zup.proposta.core.card.CardRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

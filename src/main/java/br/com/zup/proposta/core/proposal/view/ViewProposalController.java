@@ -1,7 +1,7 @@
-package br.com.zup.proposta.proposal.view;
+package br.com.zup.proposta.core.proposal.view;
 
-import br.com.zup.proposta.proposal.Proposal;
-import br.com.zup.proposta.proposal.ProposalRepository;
+import br.com.zup.proposta.core.proposal.Proposal;
+import br.com.zup.proposta.core.proposal.ProposalRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
