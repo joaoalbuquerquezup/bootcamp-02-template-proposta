@@ -8,6 +8,8 @@ import br.com.zup.proposta.utils.AssertWithHttpStatus;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static br.com.zup.proposta.core.card.CardStatus.BLOCKED;
+import static br.com.zup.proposta.core.card.CardStatus.FREE;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
 @Entity
@@ -43,6 +47,11 @@ public class Card {
     @OneToOne(optional = false, fetch = FetchType.LAZY, mappedBy = "card")
     private Proposal proposal;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private CardStatus cardStatus = FREE;
+
     /**
      * Hibernate usage only
      */
@@ -60,9 +69,14 @@ public class Card {
     public void block(BlockCard blockCard) {
         AssertWithHttpStatus.isNull(this.blockCard, UNPROCESSABLE_ENTITY);
         this.blockCard = blockCard;
+        this.cardStatus = BLOCKED;
     }
 
     public Proposal getProposal() {
         return proposal;
+    }
+
+    public String getNumber() {
+        return number;
     }
 }
