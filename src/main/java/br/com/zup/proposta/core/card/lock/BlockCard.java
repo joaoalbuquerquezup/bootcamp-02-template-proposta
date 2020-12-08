@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -20,10 +21,15 @@ public class BlockCard {
     @Column(updatable = false, unique = true, nullable = false)
     private UUID id;
 
+    @NotBlank
+    @Column(nullable = false)
     private String userAgent;
 
+    @NotBlank
+    @Column(nullable = false)
     private String ipAddress;
 
+    @Column(nullable = false)
     private LocalDateTime blockedAt = LocalDateTime.now();
 
     /**
