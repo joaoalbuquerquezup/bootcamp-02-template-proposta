@@ -2,6 +2,7 @@ package br.com.zup.proposta.core.card;
 
 import br.com.zup.proposta.core.card.biometry.Biometry;
 import br.com.zup.proposta.core.card.block.BlockCard;
+import br.com.zup.proposta.core.card.digitalwallet.DigitalWallet;
 import br.com.zup.proposta.core.card.travelnotice.CardTravelNotice;
 import br.com.zup.proposta.core.proposal.Proposal;
 import br.com.zup.proposta.utils.AssertWithHttpStatus;
@@ -20,7 +21,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import static br.com.zup.proposta.core.card.CardStatus.BLOCKED;
@@ -56,6 +59,10 @@ public class Card {
     @Column(nullable = false)
     private CardStatus cardStatus = FREE;
 
+    @OneToMany
+    @JoinColumn(name = "card_id")
+    private Set<DigitalWallet> digitalWalletList = new HashSet<>();
+
     /**
      * Hibernate usage only
      */
@@ -87,5 +94,9 @@ public class Card {
 
     public void informTravelNotice(CardTravelNotice cardTravelNotice) {
         this.cardTravelNotice = cardTravelNotice;
+    }
+
+    public boolean addWallet(DigitalWallet digitalwallet) {
+        return this.digitalWalletList.add(digitalwallet);
     }
 }

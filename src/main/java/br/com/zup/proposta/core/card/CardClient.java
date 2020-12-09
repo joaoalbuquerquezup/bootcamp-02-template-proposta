@@ -1,7 +1,9 @@
 package br.com.zup.proposta.core.card;
 
 import br.com.zup.proposta.core.card.block.BlockCardRequest;
-import br.com.zup.proposta.core.card.travelnotice.CardTravelNoticeRequestForLegacy;
+import br.com.zup.proposta.core.card.digitalwallet.InformDigitalWalletRequest;
+import br.com.zup.proposta.core.card.digitalwallet.InformDigitalWalletResponse;
+import br.com.zup.proposta.core.card.travelnotice.InformTravelNoticeRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,10 @@ public interface CardClient {
 
     @PostMapping(path = "/cartoes/{cardNumber}/avisos")
     void noticeTravel(@PathVariable(name = "cardNumber") String creditCardNumber,
-                      @RequestBody CardTravelNoticeRequestForLegacy cardTravelNoticeRequestForLegacy);
+                      @RequestBody InformTravelNoticeRequest informTravelNoticeRequest);
+
+    @PostMapping(path = "/cartoes/{cardNumber}/carteiras")
+    InformDigitalWalletResponse informDigitalWallet(@PathVariable String cardNumber,
+                                                    @RequestBody InformDigitalWalletRequest informDigitalWalletRequest);
 
 }
