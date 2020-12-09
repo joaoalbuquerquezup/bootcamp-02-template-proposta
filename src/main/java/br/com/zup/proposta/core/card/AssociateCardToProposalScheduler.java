@@ -55,7 +55,6 @@ public class AssociateCardToProposalScheduler {
 
                     return txStatus;
                 });
-
             });
         });
     }
