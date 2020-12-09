@@ -1,6 +1,7 @@
 package br.com.zup.proposta.core.card;
 
 import br.com.zup.proposta.core.card.block.BlockCardRequest;
+import br.com.zup.proposta.core.card.travelnotice.CardTravelNoticeRequestForLegacy;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,12 @@ public interface CardClient {
     @GetMapping(value = "/cartoes")
     CardRetrieveResponse retrieveCard(@RequestParam UUID idProposta);
 
-    @PostMapping(path = "/cartoes/{creditCardNumber}/bloqueios")
-    void blockCard(@PathVariable(name = "creditCardNumber") String creditCardNumber,
+    @PostMapping(path = "/cartoes/{cardNumber}/bloqueios")
+    void blockCard(@PathVariable(name = "cardNumber") String creditCardNumber,
                    @RequestBody BlockCardRequest lockRequest);
+
+    @PostMapping(path = "/cartoes/{cardNumber}/avisos")
+    void noticeTravel(@PathVariable(name = "cardNumber") String creditCardNumber,
+                      @RequestBody CardTravelNoticeRequestForLegacy cardTravelNoticeRequestForLegacy);
+
 }

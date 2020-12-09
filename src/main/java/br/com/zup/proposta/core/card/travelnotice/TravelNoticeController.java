@@ -2,8 +2,6 @@ package br.com.zup.proposta.core.card.travelnotice;
 
 import br.com.zup.proposta.core.card.Card;
 import br.com.zup.proposta.core.card.CardRepository;
-import br.com.zup.proposta.core.card.block.BlockCard;
-import br.com.zup.proposta.core.card.block.BlockCardService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -28,15 +26,15 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class TravelNoticeController {
 
     private final CardRepository cardRepository;
-    private final BlockCardService blockCardService;
+    private final TravelNoticeService travelNoticeService;
 
     private final TransactionTemplate txTemplate;
 
     public TravelNoticeController(CardRepository cardRepository,
-                                  BlockCardService blockCardService,
+                                  TravelNoticeService travelNoticeService,
                                   TransactionTemplate txTemplate) {
         this.cardRepository = cardRepository;
-        this.blockCardService = blockCardService;
+        this.travelNoticeService = travelNoticeService;
         this.txTemplate = txTemplate;
     }
 
@@ -53,7 +51,7 @@ public class TravelNoticeController {
         Object emailFromRequest = principal.getTokenAttributes().get("email");
         if (!(card.getProposal().getEmail().equals(emailFromRequest))) throw new ResponseStatusException(FORBIDDEN);
 
-        this.blockCardService.blockCard(card.getNumber());
+        this.travelNoticeService.noticeTravel(card.getNumber(), cardTravelNoticeRequest);
 
         txTemplate.execute(txStatus -> {
             CardTravelNotice cardTravelNotice = cardTravelNoticeRequest.toModel(userAgent, request.getRemoteAddr());
