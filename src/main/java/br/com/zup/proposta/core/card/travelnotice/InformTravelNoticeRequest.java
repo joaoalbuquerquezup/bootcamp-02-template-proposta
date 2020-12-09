@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class CardTravelNoticeRequestForLegacy {
+public class InformTravelNoticeRequest {
 
     @JsonProperty("destino")
     private String destiny;
@@ -16,7 +16,7 @@ public class CardTravelNoticeRequestForLegacy {
     @JsonProperty("validoAte")
     private LocalDate finishDate;
 
-    public CardTravelNoticeRequestForLegacy(CardTravelNoticeRequest cardTravelNoticeRequest) {
+    public InformTravelNoticeRequest(CardTravelNoticeRequest cardTravelNoticeRequest) {
         this.destiny = cardTravelNoticeRequest.getDestiny();
         this.finishDate = cardTravelNoticeRequest.getFinishDate();
     }

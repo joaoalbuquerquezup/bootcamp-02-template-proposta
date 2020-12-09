@@ -23,7 +23,7 @@ public class TravelNoticeService {
     public void noticeTravel(String cardNumber, CardTravelNoticeRequest cardTravelNoticeRequest) {
 
         try {
-            CardTravelNoticeRequestForLegacy request = new CardTravelNoticeRequestForLegacy(cardTravelNoticeRequest);
+            InformTravelNoticeRequest request = new InformTravelNoticeRequest(cardTravelNoticeRequest);
             this.cardClient.noticeTravel(cardNumber, request);
 
         } catch (FeignException e) {
