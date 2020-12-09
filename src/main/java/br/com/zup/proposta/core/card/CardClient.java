@@ -1,6 +1,6 @@
 package br.com.zup.proposta.core.card;
 
-import br.com.zup.proposta.core.card.lock.BlockCardRequest;
+import br.com.zup.proposta.core.card.block.BlockCardRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

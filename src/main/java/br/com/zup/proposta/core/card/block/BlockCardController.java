@@ -1,4 +1,4 @@
-package br.com.zup.proposta.core.card.lock;
+package br.com.zup.proposta.core.card.block;
 
 import br.com.zup.proposta.core.card.Card;
 import br.com.zup.proposta.core.card.CardRepository;

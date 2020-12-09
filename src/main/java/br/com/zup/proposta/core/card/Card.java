@@ -1,7 +1,7 @@
 package br.com.zup.proposta.core.card;
 
 import br.com.zup.proposta.core.card.biometry.Biometry;
-import br.com.zup.proposta.core.card.lock.BlockCard;
+import br.com.zup.proposta.core.card.block.BlockCard;
 import br.com.zup.proposta.core.proposal.Proposal;
 import br.com.zup.proposta.utils.AssertWithHttpStatus;
 

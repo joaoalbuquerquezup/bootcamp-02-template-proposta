@@ -1,4 +1,4 @@
-package br.com.zup.proposta.core.card.lock;
+package br.com.zup.proposta.core.card.block;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
