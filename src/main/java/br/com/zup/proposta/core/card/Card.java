@@ -2,6 +2,7 @@ package br.com.zup.proposta.core.card;
 
 import br.com.zup.proposta.core.card.biometry.Biometry;
 import br.com.zup.proposta.core.card.block.BlockCard;
+import br.com.zup.proposta.core.card.travelnotice.CardTravelNotice;
 import br.com.zup.proposta.core.proposal.Proposal;
 import br.com.zup.proposta.utils.AssertWithHttpStatus;
 
@@ -43,6 +44,9 @@ public class Card {
     @OneToOne(cascade = CascadeType.PERSIST)
     private BlockCard blockCard;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private CardTravelNotice cardTravelNotice;
+
     @NotNull
     @OneToOne(optional = false, fetch = FetchType.LAZY, mappedBy = "card")
     private Proposal proposal;
@@ -79,5 +83,9 @@ public class Card {
 
     public String getNumber() {
         return number;
+    }
+
+    public void informTravelNotice(CardTravelNotice cardTravelNotice) {
+        this.cardTravelNotice = cardTravelNotice;
     }
 }
