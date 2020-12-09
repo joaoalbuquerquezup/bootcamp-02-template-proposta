@@ -56,7 +56,7 @@ services:
       POSTGRES_HOST: postgres
 
   keycloak:
-    image: jboss/keycloak
+    image: jboss/keycloak:11.0.0
     ports:
       - 18443:8443
       - 18080:8080
