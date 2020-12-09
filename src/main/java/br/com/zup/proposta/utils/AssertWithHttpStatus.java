@@ -31,4 +31,8 @@ public class AssertWithHttpStatus {
             throw new ResponseStatusException(status);
         }
     }
+
+    public static void isFalse(boolean condition, HttpStatus status) {
+        if (condition) throw new ResponseStatusException(status);
+    }
 }
