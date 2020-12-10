@@ -38,6 +38,7 @@ public class AssociateCardToProposalScheduler {
     @Scheduled(fixedDelayString = "${card-to-proposal.schedule.fixed-delay}")
     public void schedule() {
 
+        // TODO: Lidar com concorrência + paginar a query
         List<Proposal> proposalList = this.proposalRepository.findByStatusAndCardIsNull(ELIGIBLE);
 
         proposalList.forEach(proposal -> {
