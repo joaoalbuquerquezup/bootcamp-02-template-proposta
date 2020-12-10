@@ -1,9 +1,11 @@
 package br.com.zup.proposta.core.proposal;
 
 import br.com.zup.proposta.core.card.Card;
+import br.com.zup.proposta.utils.AttributeEncrypterConverter;
 import br.com.zup.proposta.validation.CpfCnpj;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -31,6 +33,7 @@ public class Proposal {
 
     @NotBlank @CpfCnpj
     @Column(nullable = false, unique = true)
+    @Convert(converter = AttributeEncrypterConverter.class)
     private String document;
 
     @NotBlank @Email
