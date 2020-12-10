@@ -35,7 +35,7 @@ public class CardTravelNotice {
     private LocalDate finishDate;
 
     @Future
-    @Column(nullable = false)
+    @Column(nullable = false) // TODO: armazenar sempre em UTC
     private LocalDateTime createdAt = LocalDateTime.now();
 
     /**

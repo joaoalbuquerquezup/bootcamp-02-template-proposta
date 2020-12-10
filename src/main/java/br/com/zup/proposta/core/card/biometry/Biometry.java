@@ -17,7 +17,7 @@ public class Biometry {
     @Column(updatable = false, unique = true, nullable = false)
     private UUID id;
 
-    @Column(updatable =false, nullable = false)
+    @Column(updatable =false, nullable = false) // TODO: armazenar sempre em UTC
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(nullable = false)

@@ -29,7 +29,7 @@ public class BlockCard {
     @Column(nullable = false)
     private String ipAddress;
 
-    @Column(nullable = false)
+    @Column(nullable = false) // TODO: armazenar sempre em UTC
     private LocalDateTime blockedAt = LocalDateTime.now();
 
     /**
